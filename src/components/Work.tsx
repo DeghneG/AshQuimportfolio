@@ -26,7 +26,7 @@ export function Work() {
               Read case study
               <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1.5">→</span>
             </span>
-            <span aria-hidden className="absolute -right-10 -top-10 h-48 w-48 rounded-full bg-red/90 transition-transform duration-500 group-hover:scale-125" />
+            <span aria-hidden className="absolute -right-16 -top-16 h-32 w-32 rounded-full bg-red/90 sm:-right-10 sm:-top-10 sm:h-48 sm:w-48 transition-transform duration-500 group-hover:scale-125" />
           </Link>
         </Reveal>
 
