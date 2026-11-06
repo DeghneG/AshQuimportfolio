@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { OrbitBorder } from "./OrbitBorder";
+import { TopographyBackground } from "./ui/backgrounds-topography";
 
 export function Hero() {
   const root = useRef<HTMLElement>(null);
@@ -32,8 +33,18 @@ export function Hero() {
   );
 
   return (
-    <section ref={root} className="px-5 pt-24 sm:px-8 md:flex md:min-h-[100svh] md:flex-col md:justify-end md:pb-14">
-      <div className="mx-auto w-full max-w-6xl">
+    <section ref={root}>
+      <TopographyBackground
+        lineColor="#12285a"
+        levels={12}
+        speed={0.6}
+        scale={1.15}
+        peak={0.8}
+        driftWhenReduced
+        canvasClassName="opacity-[0.22]"
+        className="px-5 pt-24 sm:px-8 md:flex md:min-h-[100svh] md:flex-col md:justify-end md:pb-14"
+      >
+      <div className="relative mx-auto w-full max-w-6xl">
         <div className="grid items-end gap-6 md:grid-cols-12">
           <h1 className="display text-[clamp(2.8rem,8.4vw,7rem)] font-semibold leading-[0.95] md:col-span-8 md:pb-2">
             <span className="block overflow-hidden pb-[0.08em]">
@@ -90,6 +101,7 @@ export function Hero() {
           </div>
         </div>
       </div>
+      </TopographyBackground>
     </section>
   );
 }
