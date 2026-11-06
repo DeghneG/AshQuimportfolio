@@ -1,5 +1,5 @@
 import { Reveal } from "./Reveal";
-import { skills } from "@/lib/data";
+import { skillGroups } from "@/lib/data";
 
 export function About() {
   return (
@@ -15,13 +15,20 @@ export function About() {
             I&apos;m a BS Information Technology student learning by building: interfaces first,
             then the logic behind them. Here&apos;s what I work with.
           </p>
-          <ul data-reveal className="mt-8 flex flex-wrap gap-2">
-            {skills.map((s) => (
-              <li key={s} className="rounded-full border border-navy/30 px-4 py-1.5 font-mono text-xs text-navy">
-                {s}
-              </li>
+          <div className="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-3">
+            {skillGroups.map((group) => (
+              <div key={group.title} data-reveal className="border-t border-navy pt-4">
+                <h3 className="display text-lg font-semibold text-red">{group.title}</h3>
+                <ul className="mt-4 space-y-2">
+                  {group.items.map((item) => (
+                    <li key={item} className="text-ink">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </Reveal>
     </section>

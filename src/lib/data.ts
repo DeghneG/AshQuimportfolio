@@ -6,7 +6,11 @@ export const profile = {
   facebook: "https://www.facebook.com/ashjan.quimpo",
 };
 
-export const skills = ["HTML", "CSS", "JavaScript", "Python", "Next.js", "Node.js"];
+export const skillGroups = [
+  { title: "Frontend", items: ["HTML", "CSS", "JavaScript", "Next.js"] },
+  { title: "Backend", items: ["Node.js", "Python"] },
+  { title: "Tools & other", items: ["Git", "GitHub"] },
+] as const;
 
 export const education = [
   { level: "Junior High", years: "2018–2022" },
