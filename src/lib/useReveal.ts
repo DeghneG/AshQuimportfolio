@@ -17,9 +17,9 @@ type RevealOptions = {
  * prefers-reduced-motion by leaving content untouched.
  */
 export function useReveal<T extends HTMLElement = HTMLDivElement>({
-  y = 28,
-  duration = 0.9,
-  stagger = 0.09,
+  y = 56,
+  duration = 1.4,
+  stagger = 0.14,
   threshold = 0.12,
 }: RevealOptions = {}) {
   const ref = useRef<T>(null);
