@@ -13,11 +13,7 @@ const nav = [
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-ink text-[#ff6670]">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[28rem] bg-[radial-gradient(ellipse_at_50%_-10%,rgba(176,32,43,0.55),transparent_65%)]"
-      />
+    <footer className="relative overflow-hidden border-t border-line bg-paper text-navy">
       <Reveal className="relative mx-auto flex min-h-[44rem] max-w-6xl flex-col px-5 pb-8 pt-6 sm:px-8">
         <div data-reveal className="flex items-center justify-between font-mono text-[0.75rem] tracking-wide">
           <span className="flex items-center gap-2">
@@ -26,13 +22,13 @@ export function Footer() {
           <LocalTime />
         </div>
 
-        <h2 data-reveal className="display mt-14 max-w-3xl text-[clamp(3rem,9vw,6.5rem)] font-semibold leading-[0.9]">
+        <h2 data-reveal className="display mt-14 max-w-3xl text-red text-[clamp(3rem,9vw,6.5rem)] font-semibold leading-[0.9]">
           A project
           <br />
           in mind?
         </h2>
 
-        <div data-reveal className="mt-20 grid gap-10 border-t border-[#ff6670]/30 pt-8 md:grid-cols-[1.4fr_1fr_1fr]">
+        <div data-reveal className="mt-20 grid gap-10 border-t border-navy/70 pt-8 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
             <a
               href={`mailto:${profile.email}`}
@@ -72,7 +68,7 @@ export function Footer() {
         <div className="mt-auto flex items-end justify-between pt-16">
           <p
             aria-hidden
-            className="display text-[clamp(5rem,20vw,15rem)] font-bold leading-[0.78] tracking-[-0.04em]"
+            className="display text-red text-[clamp(5rem,20vw,15rem)] font-bold leading-[0.78] tracking-[-0.04em]"
           >
             Salamat.
           </p>
