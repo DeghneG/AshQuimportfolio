@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${chakra.variable} ${instrument.variable} ${jetbrains.variable} h-full`}>
-      <body className="flex min-h-full flex-col">
+      <body id="top" className="flex min-h-full flex-col">
         <SmoothScroll />
         <Header />
         <main className="flex-1">{children}</main>
