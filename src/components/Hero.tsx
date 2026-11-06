@@ -56,7 +56,7 @@ export function Hero() {
           </h1>
 
           <div className="relative ml-auto w-[min(62vw,16rem)] md:col-span-4 md:w-full md:max-w-[22rem] md:justify-self-end">
-            <div data-portrait className="relative aspect-[4/5] overflow-hidden">
+            <div data-portrait className="relative aspect-[4/5] overflow-hidden bg-paper">
               <Image
                 data-portrait-img
                 src="/profile.jpg"
@@ -65,7 +65,7 @@ export function Hero() {
                 height={1024}
                 sizes="(min-width: 768px) 352px, 62vw"
                 priority
-                className="h-full w-full origin-[50%_92%] scale-[1.3] object-cover object-[50%_30%] mix-blend-multiply contrast-[1.05]"
+                className="h-full w-full origin-[50%_92%] scale-[1.3] object-cover object-[50%_30%] contrast-[1.05]"
               />
             </div>
             <OrbitBorder />
