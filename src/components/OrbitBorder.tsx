@@ -5,10 +5,11 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 /**
- * A navy hairline frame that draws itself on, then carries a short red segment
- * in a slow lap around the portrait. Hovering the parent speeds the lap up.
- * Sized from its own box (floats 12px out on top/left/right, sits flush on the
- * bottom so the figure keeps standing on the hero rule).
+ * A double frame around the portrait. The inner navy hairline draws itself on, then
+ * a short red segment laps it. An outer, open-bottomed frame sits 8px further out and
+ * carries a pale "ghost" segment that trails the red one, so the border has momentum.
+ * The bottom stays flush so the figure keeps standing on the hero rule.
+ * Hovering the parent speeds the lap up.
  */
 export function OrbitBorder() {
   const svg = useRef<SVGSVGElement>(null);
@@ -25,29 +26,57 @@ export function OrbitBorder() {
     return () => ro.disconnect();
   }, []);
 
+  const { w, h } = size;
+  // Inner rect geometry (clockwise from top-left).
+  const W = w - 2;
+  const H = h - 2;
+  const P1 = 2 * W + 2 * H;
+  // Outer open frame: left edge up, across the top, right edge down.
+  const oW = W + 16;
+  const oH = H + 8;
+  const Pu = 2 * oH + oW;
+  const ghostLen = Pu * 0.2;
+  const segLen = P1 * 0.12;
+
   useGSAP(
     () => {
-      const perimeter = 2 * (size.w - 2) + 2 * (size.h - 2);
       if (!size.w) return;
-      // This ambient lap is a deliberate exception to reduced-motion: it still runs,
-      // but slower and without the hover speed-up.
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const root = svg.current;
+      if (!root) return;
+      const seg = root.querySelector<SVGElement>("[data-seg]");
+      const ghost = root.querySelector<SVGElement>("[data-ghost]");
+      if (!seg || !ghost) return;
 
-      gsap.fromTo(
-        "[data-base]",
-        { strokeDashoffset: perimeter },
-        { strokeDashoffset: 0, duration: 1.8, ease: "expo.out", delay: 1.2 }
-      );
+      gsap.fromTo("[data-base]", { strokeDashoffset: P1 }, { strokeDashoffset: 0, duration: 1.8, ease: "expo.out", delay: 1.2 });
+      gsap.fromTo("[data-outer]", { autoAlpha: 0 }, { autoAlpha: 1, duration: 1.4, ease: "power2.out", delay: 1.8 });
+      gsap.set([seg, ghost], { autoAlpha: 0 });
+      gsap.to([seg, ghost], { autoAlpha: 1, duration: 0.8, delay: 2.6 });
 
-      gsap.set("[data-seg]", { autoAlpha: 0 });
-      gsap.to("[data-seg]", { autoAlpha: 1, duration: 0.8, delay: 2.6 });
-      const lap = gsap.fromTo(
-        "[data-seg]",
-        { strokeDashoffset: 0 },
-        { strokeDashoffset: -perimeter, duration: reduced ? 16 : 9, ease: "none", repeat: -1, delay: 2.6 }
-      );
+      // Where the ghost's head sits on the open outer path for a given distance s along the inner rect.
+      const ghostHead = (s: number) => {
+        if (s < W) return oH + (s / W) * oW;
+        if (s < W + H) return oH + oW + ((s - W) / H) * oH;
+        if (s < 2 * W + H) return Pu + Math.min(ghostLen, ((s - W - H) / W) * ghostLen * 3);
+        return ((s - 2 * W - H) / H) * oH;
+      };
 
-      const host = svg.current?.parentElement;
+      const state = { p: 0 };
+      const lap = gsap.to(state, {
+        p: 1,
+        duration: reduced ? 16 : 9,
+        ease: "none",
+        repeat: -1,
+        delay: 2.6,
+        onUpdate: () => {
+          const s = state.p * P1;
+          seg.style.strokeDashoffset = `${-s}px`;
+          const sg = (((s - P1 * 0.05) % P1) + P1) % P1; // ghost trails the red segment
+          ghost.style.strokeDashoffset = `${ghostLen - ghostHead(sg)}px`;
+        },
+      });
+
+      const host = root.parentElement;
       if (!host || reduced) return;
       const fast = () => gsap.to(lap, { timeScale: 4, duration: 0.8, ease: "power2.out", overwrite: true });
       const slow = () => gsap.to(lap, { timeScale: 1, duration: 1.2, ease: "power2.out", overwrite: true });
@@ -61,8 +90,7 @@ export function OrbitBorder() {
     { scope: svg, dependencies: [size.w, size.h], revertOnUpdate: true }
   );
 
-  const { w, h } = size;
-  const perimeter = 2 * (w - 2) + 2 * (h - 2);
+  const outerPath = `M -7 ${h - 1} V -7 H ${w + 7} V ${h - 1}`;
 
   return (
     <svg
@@ -72,30 +100,41 @@ export function OrbitBorder() {
     >
       {w > 0 && (
         <>
+          {/* outer open frame + trailing ghost */}
+          <path data-outer d={outerPath} fill="none" stroke="#12285a" strokeOpacity={0.28} strokeWidth={1} style={{ opacity: 0 }} />
+          <path
+            data-ghost
+            d={outerPath}
+            fill="none"
+            stroke="#b0202b"
+            strokeOpacity={0.4}
+            strokeWidth={2}
+            strokeDasharray={`${ghostLen} ${Pu + ghostLen}`}
+            style={{ opacity: 0 }}
+          />
+          {/* inner hairline frame + red segment */}
           <rect
             data-base
             x={1}
             y={1}
-            width={w - 2}
-            height={h - 2}
-            
+            width={W}
+            height={H}
             fill="none"
             stroke="#12285a"
             strokeWidth={1}
-            strokeDasharray={`${perimeter} ${perimeter}`}
+            strokeDasharray={`${P1} ${P1}`}
           />
           <rect
             data-seg
             x={1}
             y={1}
-            width={w - 2}
-            height={h - 2}
-            
+            width={W}
+            height={H}
             fill="none"
             stroke="#b0202b"
             strokeWidth={3}
             strokeLinecap="butt"
-            strokeDasharray={`${perimeter * 0.12} ${perimeter * 0.88}`}
+            strokeDasharray={`${segLen} ${P1 - segLen}`}
             style={{ opacity: 0 }}
           />
         </>
