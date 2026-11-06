@@ -512,10 +512,14 @@ type TopographyBackgroundProps = React.ComponentProps<"div"> & {
   maxDpr?: number;
   /** Internal render scale (0.3-1). The canvas is stretched to fit, so lower is far cheaper but softer. */
   resolution?: number;
+  /** Render scale while the canvas is animating (it snaps back to `resolution` when still). */
+  motionResolution?: number;
   /** Target frame rate for the drift. The motion is slow, so 30 is indistinguishable from 60. */
   fps?: number;
   /** Keep the slow drift running when the visitor prefers reduced motion (cursor effects stay off). */
   driftWhenReduced?: boolean;
+  /** When false the canvas is a still picture that only animates while the pointer is over it (plus a short settle). Zero idle GPU cost. */
+  idleDrift?: boolean;
 };
 
 function TopographyBackground({
@@ -529,8 +533,10 @@ function TopographyBackground({
   transition = { stiffness: 120, damping: 20 },
   canvasClassName,
   driftWhenReduced = false,
+  idleDrift = true,
   maxDpr = 2,
   resolution = 1,
+  motionResolution = 1,
   fps = 60,
   className,
   children,
@@ -546,7 +552,24 @@ function TopographyBackground({
   const inView = useInView(containerRef);
   const pageVisible = usePageVisible();
   const reduce = !!useReducedMotion();
-  const playing = inView && pageVisible && (!reduce || driftWhenReduced);
+  const [awake, setAwake] = React.useState(true);
+  const sleepTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hold = React.useCallback(() => {
+    if (sleepTimer.current) clearTimeout(sleepTimer.current);
+    setAwake(true);
+  }, []);
+  const wake = React.useCallback((ms: number) => {
+    if (sleepTimer.current) clearTimeout(sleepTimer.current);
+    setAwake(true);
+    sleepTimer.current = setTimeout(() => setAwake(false), ms);
+  }, []);
+  React.useEffect(() => {
+    wake(2600); // lets the intro rise finish before going still
+    return () => {
+      if (sleepTimer.current) clearTimeout(sleepTimer.current);
+    };
+  }, [wake]);
+  const playing = inView && pageVisible && (!reduce || driftWhenReduced) && (idleDrift || awake);
 
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
@@ -556,13 +579,14 @@ function TopographyBackground({
   const hill = useSpring(raised, { stiffness: 80, damping: 18 });
   const rise = useMotionValue(reduce ? 1 : 0);
   const ripplesRef = React.useRef<Ripple[]>([]);
+  const resizeRef = React.useRef<() => void>(() => {});
   const drawRef = React.useRef<(time: number, looping?: boolean) => void>(
     () => {},
   );
   const timeRef = React.useRef(0);
   const paceRef = React.useRef(MIN_FRAME);
 
-  const options = { lineColor, levels, speed, scale, peak, maxDpr, resolution, fps };
+  const options = { lineColor, levels, speed, scale, peak, maxDpr, resolution: playing ? motionResolution : resolution, fps };
   const optionsRef = React.useRef(options);
   React.useLayoutEffect(() => {
     optionsRef.current = options;
@@ -654,6 +678,7 @@ function TopographyBackground({
       };
 
       drawRef.current = draw;
+      resizeRef.current = resize;
       resize();
       draw(timeRef.current);
       const observer = new ResizeObserver(() => {
@@ -664,6 +689,7 @@ function TopographyBackground({
       return () => {
         observer.disconnect();
         drawRef.current = () => {};
+        resizeRef.current = () => {};
       };
     }
 
@@ -879,6 +905,7 @@ function TopographyBackground({
     };
 
     drawRef.current = draw;
+    resizeRef.current = resize;
     resize();
     draw(timeRef.current);
     const observer = new ResizeObserver(() => {
@@ -889,12 +916,19 @@ function TopographyBackground({
     return () => {
       observer.disconnect();
       drawRef.current = () => {};
+      resizeRef.current = () => {};
     };
   }, [hill, hillX, hillY, pointerX, pointerY, rise]);
 
   React.useEffect(() => {
     drawRef.current(timeRef.current);
   }, [lineColor, levels, scale, peak]);
+
+  // Entering or leaving motion changes the render scale: resize the buffer and redraw at once.
+  React.useEffect(() => {
+    resizeRef.current();
+    drawRef.current(timeRef.current);
+  }, [playing]);
 
   React.useEffect(() => {
     if (!playing) return;
@@ -923,6 +957,7 @@ function TopographyBackground({
       {...props}
       onPointerMove={(event) => {
         onPointerMove?.(event);
+        if (!idleDrift) hold();
         if (!interactive || reduce) return;
         const { x, y } = point(event);
         pointerX.set(x);
@@ -931,10 +966,12 @@ function TopographyBackground({
       }}
       onPointerLeave={(event) => {
         onPointerLeave?.(event);
+        if (!idleDrift) wake(2600);
         raised.set(0);
       }}
       onPointerDown={(event) => {
         onPointerDown?.(event);
+        if (!idleDrift) hold();
         if (!interactive || reduce) return;
         const { x, y } = point(event);
         pointerX.set(x);

@@ -42,9 +42,10 @@ export function Hero() {
         scale={1.15}
         peak={0.8}
         driftWhenReduced
-        maxDpr={1}
-        resolution={0.5}
-        fps={24}
+        maxDpr={1.5}
+        idleDrift={false}
+        motionResolution={0.6}
+        fps={40}
         canvasClassName="opacity-[0.22]"
         className="px-5 pt-24 sm:px-8 md:flex md:min-h-[100svh] md:flex-col md:justify-end md:pb-14"
       >
