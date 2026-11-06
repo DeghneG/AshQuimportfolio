@@ -65,14 +65,14 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-auto flex items-end justify-between pt-16">
+        <div className="mt-auto flex flex-col gap-6 pt-16 sm:flex-row sm:items-end sm:justify-between">
           <p
             aria-hidden
             className="display text-red text-[clamp(5rem,20vw,15rem)] font-bold leading-[0.78] tracking-[-0.04em]"
           >
             Salamat.
           </p>
-          <div className="flex flex-col items-end gap-2 pb-2 font-mono text-[0.75rem]">
+          <div className="flex flex-col items-start gap-2 pb-2 font-mono sm:items-end text-[0.75rem]">
             <a href="#top" className="rule-link">Back to top ↑</a>
             <span>© 2026 {profile.name}</span>
           </div>
