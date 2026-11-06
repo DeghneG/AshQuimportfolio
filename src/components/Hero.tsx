@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { OrbitBorder } from "./OrbitBorder";
@@ -63,10 +64,22 @@ export function Hero() {
         <div data-bar className="h-px w-full bg-navy" />
 
         <div className="flex flex-col gap-8 pt-8 sm:flex-row sm:items-start sm:justify-between">
-          <p data-fade className="max-w-md text-lg leading-relaxed text-ink-soft">
-            I&apos;m <span className="font-medium text-ink">Ashjan Quimpo</span>, a third-year IT student
-            at the University of San Agustin building thoughtful things for the web.
-          </p>
+          <div className="max-w-md">
+            <p data-fade className="text-lg leading-relaxed text-ink-soft">
+              I&apos;m <span className="font-medium text-ink">Ashjan Quimpo</span>, a third-year IT student
+              at the University of San Agustin building thoughtful things for the web.
+            </p>
+            <Link
+              data-fade
+              href="/work/community-voice"
+              className="group mt-5 inline-flex items-center gap-3 text-sm"
+            >
+              <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-red" />
+              <span className="text-ink-soft">Now building</span>
+              <span className="rule-link font-medium text-navy">CommunityVoice</span>
+              <span aria-hidden className="text-navy transition-transform duration-300 group-hover:translate-x-1">→</span>
+            </Link>
+          </div>
           <div data-fade className="flex gap-3">
             <a href="#work" className="rounded-full bg-red px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-red-deep">
               View work

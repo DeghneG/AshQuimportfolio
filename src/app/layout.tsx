@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { ScrollProgress } from "@/components/ScrollProgress";
 
 const chakra = Chakra_Petch({ variable: "--font-chakra", subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 const instrument = Instrument_Sans({ variable: "--font-instrument", subsets: ["latin"] });
@@ -19,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${chakra.variable} ${instrument.variable} ${jetbrains.variable} h-full`}>
       <body id="top" className="flex min-h-full flex-col">
         <SmoothScroll />
+        <ScrollProgress />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

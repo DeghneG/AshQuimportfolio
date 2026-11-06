@@ -25,6 +25,14 @@
   --font-mono: var(--font-jetbrains);
 }
 
+/* Native scrollbar hidden; the red progress bar at the top replaces it. */
+html {
+  scrollbar-width: none;
+}
+html::-webkit-scrollbar {
+  display: none;
+}
+
 /* Lenis owns smooth scrolling; native smooth-scroll would fight it. */
 html.lenis,
 html.lenis body {
