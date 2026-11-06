@@ -28,7 +28,10 @@ export function OrbitBorder() {
   useGSAP(
     () => {
       const perimeter = 2 * (size.w - 2) + 2 * (size.h - 2);
-      if (!size.w || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      if (!size.w) return;
+      // This ambient lap is a deliberate exception to reduced-motion: it still runs,
+      // but slower and without the hover speed-up.
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       gsap.fromTo(
         "[data-base]",
@@ -41,11 +44,11 @@ export function OrbitBorder() {
       const lap = gsap.fromTo(
         "[data-seg]",
         { strokeDashoffset: 0 },
-        { strokeDashoffset: -perimeter, duration: 9, ease: "none", repeat: -1, delay: 2.6 }
+        { strokeDashoffset: -perimeter, duration: reduced ? 16 : 9, ease: "none", repeat: -1, delay: 2.6 }
       );
 
       const host = svg.current?.parentElement;
-      if (!host) return;
+      if (!host || reduced) return;
       const fast = () => gsap.to(lap, { timeScale: 4, duration: 0.8, ease: "power2.out", overwrite: true });
       const slow = () => gsap.to(lap, { timeScale: 1, duration: 1.2, ease: "power2.out", overwrite: true });
       host.addEventListener("pointerenter", fast);
