@@ -94,3 +94,17 @@ body {
 .rule-link:hover::after {
   transform: scaleX(1);
 }
+
+/* Preloader: skipped for returning visitors, with a CSS failsafe in case JS never starts it. */
+html[data-preloader="skip"] #preloader {
+  display: none;
+}
+#preloader {
+  animation: aq-preloader-failsafe 0s linear 7s forwards;
+}
+@keyframes aq-preloader-failsafe {
+  to {
+    visibility: hidden;
+    pointer-events: none;
+  }
+}

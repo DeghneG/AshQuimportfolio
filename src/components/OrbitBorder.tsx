@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { preloaderDelay } from "@/lib/preloader";
 
 /**
  * A double frame around the portrait. The inner navy hairline draws itself on, then
@@ -41,6 +42,7 @@ export function OrbitBorder() {
   useGSAP(
     () => {
       if (!size.w) return;
+      const pl = preloaderDelay();
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const root = svg.current;
       if (!root) return;
@@ -48,10 +50,10 @@ export function OrbitBorder() {
       const ghost = root.querySelector<SVGElement>("[data-ghost]");
       if (!seg || !ghost) return;
 
-      gsap.fromTo("[data-base]", { strokeDashoffset: P1 }, { strokeDashoffset: 0, duration: 1.8, ease: "expo.out", delay: 1.2 });
-      gsap.fromTo("[data-outer]", { autoAlpha: 0 }, { autoAlpha: 1, duration: 1.4, ease: "power2.out", delay: 1.8 });
+      gsap.fromTo("[data-base]", { strokeDashoffset: P1 }, { strokeDashoffset: 0, duration: 1.8, ease: "expo.out", delay: 1.2 + pl });
+      gsap.fromTo("[data-outer]", { autoAlpha: 0 }, { autoAlpha: 1, duration: 1.4, ease: "power2.out", delay: 1.8 + pl });
       gsap.set([seg, ghost], { autoAlpha: 0 });
-      gsap.to([seg, ghost], { autoAlpha: 1, duration: 0.8, delay: 2.6 });
+      gsap.to([seg, ghost], { autoAlpha: 1, duration: 0.8, delay: 2.6 + pl });
 
       // Where the ghost's head sits on the open outer path for a given distance s along the inner rect.
       const ghostHead = (s: number) => {

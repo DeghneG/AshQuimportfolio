@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { OrbitBorder } from "./OrbitBorder";
+import { preloaderDelay } from "@/lib/preloader";
 import { TopographyBackground } from "./ui/backgrounds-topography";
 
 export function Hero() {
@@ -17,7 +18,7 @@ export function Hero() {
 
       // One authored moment: the type rises, the rule is drawn, and the portrait
       // is lifted up out of that rule like a figure stepping onto a stage.
-      const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
+      const tl = gsap.timeline({ delay: preloaderDelay(), defaults: { ease: "expo.out" } });
       tl.from("[data-line]", { yPercent: 115, duration: 1.3, stagger: 0.14 })
         .from("[data-bar]", { scaleX: 0, transformOrigin: "left", duration: 1.4 }, 0.15)
         .fromTo(
