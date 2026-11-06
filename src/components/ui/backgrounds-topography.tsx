@@ -508,6 +508,12 @@ type TopographyBackgroundProps = React.ComponentProps<"div"> & {
   transition?: SpringOptions;
   /** Extra classes for the drawing canvas (e.g. an opacity to soften the lines). */
   canvasClassName?: string;
+  /** Cap on device pixel ratio for the canvas. Lower is much cheaper on high-DPI screens. */
+  maxDpr?: number;
+  /** Internal render scale (0.3-1). The canvas is stretched to fit, so lower is far cheaper but softer. */
+  resolution?: number;
+  /** Target frame rate for the drift. The motion is slow, so 30 is indistinguishable from 60. */
+  fps?: number;
   /** Keep the slow drift running when the visitor prefers reduced motion (cursor effects stay off). */
   driftWhenReduced?: boolean;
 };
@@ -523,6 +529,9 @@ function TopographyBackground({
   transition = { stiffness: 120, damping: 20 },
   canvasClassName,
   driftWhenReduced = false,
+  maxDpr = 2,
+  resolution = 1,
+  fps = 60,
   className,
   children,
   onPointerMove,
@@ -553,7 +562,7 @@ function TopographyBackground({
   const timeRef = React.useRef(0);
   const paceRef = React.useRef(MIN_FRAME);
 
-  const options = { lineColor, levels, speed, scale, peak };
+  const options = { lineColor, levels, speed, scale, peak, maxDpr, resolution, fps };
   const optionsRef = React.useRef(options);
   React.useLayoutEffect(() => {
     optionsRef.current = options;
@@ -583,7 +592,8 @@ function TopographyBackground({
     });
     const render = gl ? createGlRenderer(gl) : null;
     if (render) {
-      paceRef.current = 0;
+      const target = optionsRef.current.fps;
+      paceRef.current = target >= 60 ? 0 : 1000 / target - 4;
       let width = 0;
       let height = 0;
       let dpr = 1;
@@ -596,7 +606,7 @@ function TopographyBackground({
         const rect = container.getBoundingClientRect();
         width = rect.width;
         height = rect.height;
-        dpr = Math.max(1, Math.min(window.devicePixelRatio || 1, 2));
+        dpr = Math.min(window.devicePixelRatio || 1, optionsRef.current.maxDpr) * optionsRef.current.resolution;
         canvas.width = Math.max(1, Math.round(width * dpr));
         canvas.height = Math.max(1, Math.round(height * dpr));
         canvas.style.width = `${width}px`;
@@ -679,7 +689,7 @@ function TopographyBackground({
       const rect = container.getBoundingClientRect();
       width = rect.width;
       height = rect.height;
-      dpr = Math.max(1, Math.min(window.devicePixelRatio || 1, 2));
+      dpr = Math.min(window.devicePixelRatio || 1, optionsRef.current.maxDpr) * optionsRef.current.resolution;
       canvas.width = Math.max(1, Math.round(width * dpr));
       canvas.height = Math.max(1, Math.round(height * dpr));
       canvas.style.width = `${width}px`;

@@ -9,7 +9,7 @@ const links = [
 
 export function Header() {
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-line/70 bg-paper/80 backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-line/70 bg-paper/95">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
         <Link href="/" className="display text-lg font-semibold tracking-tight">
           AQ<span className="text-red">.</span>
