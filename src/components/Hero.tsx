@@ -56,7 +56,7 @@ export function Hero() {
               <span data-line className="block">Press start.</span>
             </span>
             <span className="block overflow-hidden pb-[0.08em]">
-              <span data-line className="block text-red">Ship code.</span>
+              <span data-line className="block text-red">Ship code<span aria-hidden className="caret" /></span>
             </span>
           </h1>
 

@@ -108,3 +108,24 @@ html[data-preloader="done"] #preloader {
     pointer-events: none;
   }
 }
+
+/* Terminal-style text cursor that replaces the final period of "Ship code." */
+.caret {
+  display: inline-block;
+  width: 0.075em;
+  height: 0.98em;
+  margin-left: 0.14em;
+  vertical-align: -0.14em;
+  background: currentColor;
+  animation: aq-caret 1.1s step-end infinite;
+}
+@keyframes aq-caret {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}

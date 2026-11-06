@@ -57,7 +57,7 @@ export function Preloader() {
               <span data-pl-line className="block opacity-0">Press start.</span>
             </span>
             <span className="block overflow-hidden pb-[0.08em]">
-              <span data-pl-line className="block text-[#ff6670] opacity-0">Ship code.</span>
+              <span data-pl-line className="block text-[#ff6670] opacity-0">Ship code<span aria-hidden className="caret" /></span>
             </span>
           </p>
           <div data-pl-rule className="mt-8 h-[2px] w-full origin-left bg-[#ff6670] opacity-0" />
