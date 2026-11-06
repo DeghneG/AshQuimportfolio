@@ -1,7 +1,7 @@
 /**
  * Seconds after mount at which the preloader curtain has lifted far enough for the
- * hero's own entrance to begin. Zero when the preloader is skipped (already seen this
- * session), so every entrance animation can simply add this to its delay.
+ * hero's own entrance to begin. Zero once the curtain has finished, so in-site
+ * navigation back to the home page does not wait for a curtain that never plays.
  */
 export const PRELOADER_REVEAL_AT = 1.9;
 
@@ -10,5 +10,5 @@ export function preloaderDelay(): number {
   return document.documentElement.dataset.preloader === "play" ? PRELOADER_REVEAL_AT : 0;
 }
 
-/** Inline, pre-paint script: decide once per session whether the preloader plays. */
-export const PRELOADER_BOOT_SCRIPT = `try{document.documentElement.dataset.preloader=sessionStorage.getItem("aq-preloaded")?"skip":"play"}catch(e){document.documentElement.dataset.preloader="skip"}`;
+/** Inline, pre-paint script: the curtain plays on every full page load or refresh. */
+export const PRELOADER_BOOT_SCRIPT = `document.documentElement.dataset.preloader="play"`;

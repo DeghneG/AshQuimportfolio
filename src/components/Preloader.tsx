@@ -6,7 +6,7 @@ import gsap from "gsap";
 
 /**
  * Tagline curtain: a navy panel opens on "Press start. / Ship code." in the same masked
- * rise as the hero headline, then lifts away. Plays once per session (see
+ * rise as the hero headline, then lifts away. Plays on every full page load (see
  * PRELOADER_BOOT_SCRIPT in layout) and never blocks on real loading, so there is no
  * progress bar to lie about.
  */
@@ -25,10 +25,8 @@ export function Preloader() {
         defaults: { ease: "expo.out" },
         onComplete: () => {
           el.style.display = "none";
+          html.dataset.preloader = "done";
           html.style.overflow = "";
-          try {
-            sessionStorage.setItem("aq-preloaded", "1");
-          } catch {}
         },
       });
 

@@ -95,8 +95,8 @@ body {
   transform: scaleX(1);
 }
 
-/* Preloader: skipped for returning visitors, with a CSS failsafe in case JS never starts it. */
-html[data-preloader="skip"] #preloader {
+/* Preloader: hidden once finished, with a CSS failsafe in case JS never starts it. */
+html[data-preloader="done"] #preloader {
   display: none;
 }
 #preloader {

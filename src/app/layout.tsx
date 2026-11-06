@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${chakra.variable} ${instrument.variable} ${jetbrains.variable} h-full`}
     >
       <head>
-        {/* Runs before first paint so returning visitors never see the curtain flash. */}
+        {/* Runs before first paint so the curtain covers the page from the very first frame. */}
         <Script id="preloader-boot" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: PRELOADER_BOOT_SCRIPT }} />
         <noscript>
           <style>{`#preloader{display:none}`}</style>
