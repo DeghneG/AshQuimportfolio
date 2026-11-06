@@ -3,7 +3,7 @@ export const profile = {
   email: "ashjanquimpo@gmail.com",
   github: "https://github.com/",
   linkedin: "https://www.linkedin.com/in/ashjan-quimpo-b83893449",
-  facebook: "https://www.facebook.com/",
+  facebook: "https://www.facebook.com/ashjan.quimpo",
 };
 
 export const skills = ["HTML", "CSS", "JavaScript", "Python", "Next.js", "Node.js"];
