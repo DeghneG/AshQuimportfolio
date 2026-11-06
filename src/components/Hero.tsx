@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { OrbitBorder } from "./OrbitBorder";
 
 export function Hero() {
   const root = useRef<HTMLElement>(null);
@@ -42,7 +43,7 @@ export function Hero() {
             </span>
           </h1>
 
-          <div className="ml-auto w-[min(62vw,16rem)] md:col-span-4 md:w-full md:max-w-[22rem] md:justify-self-end">
+          <div className="relative ml-auto w-[min(62vw,16rem)] md:col-span-4 md:w-full md:max-w-[22rem] md:justify-self-end">
             <div data-portrait className="relative aspect-[4/5] overflow-hidden">
               <Image
                 data-portrait-img
@@ -55,6 +56,7 @@ export function Hero() {
                 className="h-full w-full origin-[50%_92%] scale-[1.3] object-cover object-[50%_30%] mix-blend-multiply contrast-[1.05]"
               />
             </div>
+            <OrbitBorder />
           </div>
         </div>
 
