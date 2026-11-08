@@ -51,7 +51,7 @@ export function ProjectCard({ project }: { project: Project }) {
         {project.video && (
           <video
             ref={video}
-            src={project.video}
+            src={project.preview ?? project.video}
             muted
             loop
             playsInline

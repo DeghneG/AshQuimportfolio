@@ -9,7 +9,9 @@ export const profile = {
 export const skillGroups = [
   { title: "Frontend", items: ["HTML", "CSS", "JavaScript", "Next.js"] },
   { title: "Backend", items: ["Node.js", "Python"] },
-  { title: "Tools & other", items: ["Git", "GitHub"] },
+  { title: "Dev tools", items: ["Git", "GitHub", "Antigravity"] },
+  { title: "Design & video", items: ["Canva", "Adobe", "CapCut"] },
+  { title: "AI assistants", items: ["ChatGPT", "Gemini", "Claude"] },
 ] as const;
 
 export const education = [
@@ -36,8 +38,10 @@ export type Project = {
   href: string;
   /** Tall artwork pans slowly down on hover to reveal the rest of it. */
   tall?: boolean;
-  /** Optional muted preview that plays on hover; `image` is its poster. */
+  /** Optional full video, played with controls on the project page; `image` is its poster. */
   video?: string;
+  /** Tiny silent clip played on card hover so hovering never downloads the full video. */
+  preview?: string;
 };
 
 /** Finished projects, by term. Slots without an entry render as "Coming soon" placeholders. */
@@ -74,6 +78,7 @@ export const projectsByTerm: Partial<Record<(typeof terms)[number]["key"], Proje
       alt: "Still from the Daily Routine video: a person typing on a laptop by a sunlit window",
       href: "/Midterm/daily-routine.mp4",
       video: "/Midterm/daily-routine.mp4",
+      preview: "/Midterm/daily-routine-preview.mp4",
     },
     {
       slug: "voxpop",
@@ -83,8 +88,9 @@ export const projectsByTerm: Partial<Record<(typeof terms)[number]["key"], Proje
       width: 1280,
       height: 720,
       alt: "Still from the VoxPOP video: the statue in the University of San Agustin courtyard",
-      href: "/Midterm/QUIMPO_CHIYUTO_VoxPOP.mp4",
-      video: "/Midterm/QUIMPO_CHIYUTO_VoxPOP.mp4",
+      href: "/Midterm/voxpop.mp4",
+      video: "/Midterm/voxpop.mp4",
+      preview: "/Midterm/voxpop-preview.mp4",
     },
   ],
   finals: [
