@@ -24,7 +24,7 @@ export function Header() {
             href="/resume.pdf"
             className="hidden rounded-full border border-navy px-4 py-1.5 text-navy transition-colors hover:bg-navy hover:text-paper sm:inline-block"
           >
-            Resume
+            Résumé
           </a>
         </nav>
       </div>
