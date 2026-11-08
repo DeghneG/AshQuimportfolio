@@ -23,3 +23,24 @@ export const terms = [
   { key: "midterm", label: "Midterm", count: 3 },
   { key: "finals", label: "Finals", count: 3 },
 ] as const;
+
+export type Project = {
+  title: string;
+  kind: string;
+  image: string;
+  alt: string;
+  href: string;
+};
+
+/** Finished projects, by term. Slots without an entry render as "Coming soon" placeholders. */
+export const projectsByTerm: Partial<Record<(typeof terms)[number]["key"], Project[]>> = {
+  midterm: [
+    {
+      title: "ScanSync",
+      kind: "Infographic · PDF",
+      image: "/Midterm/scansync-infographic.webp",
+      alt: "ScanSync, Smart Attendance infographic: problem, solution, methodology and timeline",
+      href: "/Midterm/QUIMPO_Infographics.pdf",
+    },
+  ],
+};
