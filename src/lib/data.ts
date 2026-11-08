@@ -62,5 +62,13 @@ export const projectsByTerm: Partial<Record<(typeof terms)[number]["key"], Proje
       href: "/Midterm/daily-routine.mp4",
       video: "/Midterm/daily-routine.mp4",
     },
+    {
+      title: "VoxPOP",
+      kind: "Video · MP4",
+      image: "/Midterm/voxpop-poster.webp",
+      alt: "Still from the VoxPOP video: the statue in the University of San Agustin courtyard",
+      href: "/Midterm/QUIMPO_CHIYUTO_VoxPOP.mp4",
+      video: "/Midterm/QUIMPO_CHIYUTO_VoxPOP.mp4",
+    },
   ],
 };

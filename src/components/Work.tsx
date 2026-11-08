@@ -39,7 +39,7 @@ export function Work() {
                 <span className="label">{String(ti + 1).padStart(2, "0")} / 03</span>
               </div>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {Array.from({ length: t.count }, (_, i) => {
+                {Array.from({ length: Math.max(t.count, projectsByTerm[t.key]?.length ?? 0) }, (_, i) => {
                   const project = projectsByTerm[t.key]?.[i];
                   if (project) return <ProjectCard key={i} project={project} />;
                   return (
