@@ -87,6 +87,18 @@ export const projectsByTerm: Partial<Record<(typeof terms)[number]["key"], Proje
       video: "/Midterm/QUIMPO_CHIYUTO_VoxPOP.mp4",
     },
   ],
+  finals: [
+    {
+      slug: "ball",
+      title: "Ball",
+      kind: "Animation · GIF",
+      image: "/Finals/QUIMPO_BALL.gif",
+      width: 1920,
+      height: 1080,
+      alt: "Animated GIF of a cyan ball moving across a white background",
+      href: "/Finals/QUIMPO_BALL.gif",
+    },
+  ],
 };
 
 export type ListedProject = Project & { term: string; termKey: (typeof terms)[number]["key"] };

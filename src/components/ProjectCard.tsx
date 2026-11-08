@@ -41,6 +41,7 @@ export function ProjectCard({ project }: { project: Project }) {
           alt={project.alt}
           fill
           sizes="(min-width: 1024px) 360px, (min-width: 640px) 45vw, 90vw"
+          unoptimized={project.image.endsWith(".gif")}
           className={
             project.tall
               ? "object-cover object-[50%_0%] transition-[object-position] duration-[2800ms] ease-in-out group-hover:object-[50%_72%]"

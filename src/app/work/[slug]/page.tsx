@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -17,7 +18,16 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   return { title: project ? `${project.title} — Ashjan Quimpo` : "Project — Ashjan Quimpo" };
 }
 
-export default async function ProjectPage({ params }: { params: Promise<Params> }) {
+export default function ProjectPage({ params }: { params: Promise<Params> }) {
+  // Reading params inside Suspense keeps the page shell static (instant navigation).
+  return (
+    <Suspense fallback={<div className="min-h-[70svh]" aria-hidden />}>
+      <ProjectContent params={params} />
+    </Suspense>
+  );
+}
+
+async function ProjectContent({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
   const all = listProjects();
   const project = all.find((p) => p.slug === slug);
@@ -78,6 +88,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
                 width={project.width}
                 height={project.height}
                 sizes="(min-width: 1024px) 1024px, 100vw"
+                unoptimized={project.image.endsWith(".gif")}
                 priority
                 className="block h-auto w-full"
               />
