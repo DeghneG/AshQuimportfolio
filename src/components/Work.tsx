@@ -49,17 +49,23 @@ export function Work() {
                         href={project.href}
                         target="_blank"
                         rel="noreferrer"
-                        className="group relative block aspect-[4/3] overflow-hidden rounded-xl border border-navy bg-paper"
+                        className="group flex aspect-[4/3] flex-col overflow-hidden rounded-xl border border-navy bg-paper"
                       >
-                        {/* The infographic is tall, so on hover it slowly pans down to reveal the rest. */}
+                        {/* Image area on top, caption bar below, so the caption never covers the artwork. */}
+                        <div className="relative min-h-0 flex-1 overflow-hidden">
                         <Image
                           src={project.image}
                           alt={project.alt}
                           fill
                           sizes="(min-width: 1024px) 360px, (min-width: 640px) 45vw, 90vw"
-                          className="object-cover object-[50%_0%] transition-[object-position] duration-[2800ms] ease-in-out group-hover:object-[50%_72%]"
+                          className={
+                            project.tall
+                              ? "object-cover object-[50%_0%] transition-[object-position] duration-[2800ms] ease-in-out group-hover:object-[50%_72%]"
+                              : "object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                          }
                         />
-                        <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 border-t border-navy bg-paper px-5 py-4">
+                        </div>
+                        <div className="flex shrink-0 items-end justify-between gap-4 border-t border-navy bg-paper px-5 py-4">
                           <div>
                             <h4 className="display text-xl font-semibold">{project.title}</h4>
                             <p className="label mt-1">{project.kind}</p>

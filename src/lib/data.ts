@@ -30,6 +30,8 @@ export type Project = {
   image: string;
   alt: string;
   href: string;
+  /** Tall artwork pans slowly down on hover to reveal the rest of it. */
+  tall?: boolean;
 };
 
 /** Finished projects, by term. Slots without an entry render as "Coming soon" placeholders. */
@@ -41,6 +43,14 @@ export const projectsByTerm: Partial<Record<(typeof terms)[number]["key"], Proje
       image: "/Midterm/scansync-infographic.webp",
       alt: "ScanSync, Smart Attendance infographic: problem, solution, methodology and timeline",
       href: "/Midterm/QUIMPO_Infographics.pdf",
+      tall: true,
+    },
+    {
+      title: "Daily Routine",
+      kind: "Storyboard · Image",
+      image: "/Midterm/daily-routine.webp",
+      alt: "Nine-panel storyboard of a stick figure's day, from waking at 6:00 AM to sleeping at 10:00 PM",
+      href: "/Midterm/daily-routine.webp",
     },
   ],
 };
