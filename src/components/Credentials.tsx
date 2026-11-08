@@ -95,6 +95,7 @@ export function Credentials() {
                     <div data-text>
                       <p className={`font-mono text-sm ${current ? "text-red" : "text-ink-soft"}`}>{e.years}</p>
                       <h3 className="display mt-1 text-2xl font-semibold sm:text-3xl">{e.level}</h3>
+                      <p className="mt-1 text-ink-soft">{e.school}</p>
                     </div>
                   </li>
                 );

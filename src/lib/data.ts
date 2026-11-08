@@ -14,10 +14,12 @@ export const skillGroups = [
   { title: "AI assistants", items: ["ChatGPT", "Gemini", "Claude"] },
 ] as const;
 
+const SCHOOL = "University of San Agustin";
+
 export const education = [
-  { level: "Junior High", years: "2018–2022" },
-  { level: "Senior High", years: "2022–2024" },
-  { level: "BS Information Technology", years: "2024–present" },
+  { level: "Junior High", years: "2018–2022", school: SCHOOL },
+  { level: "Senior High", years: "2022–2024", school: SCHOOL },
+  { level: "BS Information Technology", years: "2024–present", school: SCHOOL },
 ];
 
 export const terms = [
