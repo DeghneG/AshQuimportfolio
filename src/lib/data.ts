@@ -106,6 +106,18 @@ export const projectsByTerm: Partial<Record<(typeof terms)[number]["key"], Proje
       alt: "Animated GIF of a cyan ball moving across a white background",
       href: "/Finals/QUIMPO_BALL.gif",
     },
+    {
+      slug: "finals-video",
+      title: "Finals Video",
+      kind: "Video · MP4",
+      image: "/Finals/finals-video-poster.webp",
+      width: 720,
+      height: 960,
+      alt: "Still from the Finals video: ID lanyards, keys and a folded paper plane on a table, seen from above",
+      href: "/Finals/finals-video.mp4",
+      video: "/Finals/finals-video.mp4",
+      preview: "/Finals/finals-video-preview.mp4",
+    },
   ],
 };
 

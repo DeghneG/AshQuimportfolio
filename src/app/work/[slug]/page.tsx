@@ -66,7 +66,7 @@ async function ProjectContent({ params }: { params: Promise<Params> }) {
           <div
             data-reveal
             className={`mx-auto overflow-hidden rounded-xl border border-navy bg-paper ${
-              project.tall ? "max-w-xl" : "max-w-5xl"
+              project.tall ? "max-w-xl" : project.height > project.width ? "max-w-md" : "max-w-5xl"
             }`}
           >
             {project.video ? (
@@ -75,7 +75,8 @@ async function ProjectContent({ params }: { params: Promise<Params> }) {
                 playsInline
                 preload="metadata"
                 poster={project.image}
-                className="block aspect-video w-full bg-ink"
+                style={{ aspectRatio: `${project.width} / ${project.height}` }}
+                className="block w-full bg-ink"
               >
                 <source src={project.video} type="video/mp4" />
                 Your browser can&apos;t play this video.{" "}
