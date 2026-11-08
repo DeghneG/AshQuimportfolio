@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { ProjectCard } from "./ProjectCard";
 import { Reveal } from "./Reveal";
 import { projectsByTerm, terms } from "@/lib/data";
 
@@ -41,45 +41,7 @@ export function Work() {
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {Array.from({ length: t.count }, (_, i) => {
                   const project = projectsByTerm[t.key]?.[i];
-                  if (project) {
-                    return (
-                      <a
-                        key={i}
-                        data-reveal
-                        href={project.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="group flex aspect-[4/3] flex-col overflow-hidden rounded-xl border border-navy bg-paper"
-                      >
-                        {/* Image area on top, caption bar below, so the caption never covers the artwork. */}
-                        <div className="relative min-h-0 flex-1 overflow-hidden">
-                        <Image
-                          src={project.image}
-                          alt={project.alt}
-                          fill
-                          sizes="(min-width: 1024px) 360px, (min-width: 640px) 45vw, 90vw"
-                          className={
-                            project.tall
-                              ? "object-cover object-[50%_0%] transition-[object-position] duration-[2800ms] ease-in-out group-hover:object-[50%_72%]"
-                              : "object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                          }
-                        />
-                        </div>
-                        <div className="flex shrink-0 items-end justify-between gap-4 border-t border-navy bg-paper px-5 py-4">
-                          <div>
-                            <h4 className="display text-xl font-semibold">{project.title}</h4>
-                            <p className="label mt-1">{project.kind}</p>
-                          </div>
-                          <span
-                            aria-hidden
-                            className="text-lg text-red transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
-                          >
-                            ↗
-                          </span>
-                        </div>
-                      </a>
-                    );
-                  }
+                  if (project) return <ProjectCard key={i} project={project} />;
                   return (
                     <article
                       key={i}
