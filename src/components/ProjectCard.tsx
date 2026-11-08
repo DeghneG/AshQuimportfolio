@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import type { Project } from "@/lib/data";
 
 /**
@@ -25,11 +26,9 @@ export function ProjectCard({ project }: { project: Project }) {
   };
 
   return (
-    <a
+    <Link
       data-reveal
-      href={project.href}
-      target="_blank"
-      rel="noreferrer"
+      href={`/work/${project.slug}`}
       onPointerEnter={play}
       onPointerLeave={stop}
       onFocus={play}
@@ -82,6 +81,6 @@ export function ProjectCard({ project }: { project: Project }) {
           ↗
         </span>
       </div>
-    </a>
+    </Link>
   );
 }

@@ -33,7 +33,8 @@ export function Work() {
 
         <div className="space-y-16">
           {terms.map((t, ti) => (
-            <Reveal key={t.key} stagger={0.08}>
+            <div key={t.key} id={t.key} className="scroll-mt-24">
+            <Reveal stagger={0.08}>
               <div data-reveal className="mb-6 flex items-baseline justify-between border-b border-navy/70 pb-3">
                 <h3 className="display text-2xl font-semibold">{t.label} projects</h3>
                 <span className="label">{String(ti + 1).padStart(2, "0")} / 03</span>
@@ -60,6 +61,7 @@ export function Work() {
                 })}
               </div>
             </Reveal>
+            </div>
           ))}
         </div>
       </div>
