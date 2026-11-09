@@ -78,6 +78,18 @@ export const projectsByTerm: Partial<Record<(typeof terms)[number]["key"], Proje
       href: "/Prelim/bandlab.webp",
       fit: "contain",
     },
+    {
+      slug: "montage",
+      title: "Video Montage",
+      kind: "Video · MP4",
+      image: "/Prelim/montage-poster.webp",
+      width: 1280,
+      height: 608,
+      alt: "Still from the montage video: a race car tire with a red Pirelli stripe",
+      href: "/Prelim/montage.mp4",
+      video: "/Prelim/montage.mp4",
+      preview: "/Prelim/montage-preview.mp4",
+    },
   ],
   midterm: [
     {
