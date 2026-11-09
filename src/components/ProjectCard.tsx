@@ -35,7 +35,7 @@ export function ProjectCard({ project }: { project: Project }) {
       onBlur={stop}
       className="group flex aspect-[4/3] flex-col overflow-hidden rounded-xl border border-navy bg-paper"
     >
-      <div className={`relative min-h-0 flex-1 overflow-hidden ${project.fit === "contain" ? "bg-white" : ""}`}>
+      <div className={`relative min-h-0 flex-1 overflow-hidden ${project.fit === "contain" ? (project.matte === "black" ? "bg-black" : "bg-white") : ""}`}>
         <Image
           src={project.image}
           alt={project.alt}
@@ -46,7 +46,7 @@ export function ProjectCard({ project }: { project: Project }) {
             project.tall
               ? "object-cover object-[50%_0%] transition-[object-position] duration-[2800ms] ease-in-out group-hover:object-[50%_72%]"
               : project.fit === "contain"
-                ? "object-contain p-3 transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                ? `object-contain ${project.matte === "black" ? "" : "p-3"} transition-transform duration-700 ease-out group-hover:scale-[1.04]`
                 : "object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
           }
         />

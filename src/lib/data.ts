@@ -48,6 +48,8 @@ export type Project = {
   external?: { label: string; url: string };
   /** Wide or text-heavy artwork is shown whole (letterboxed) on the card instead of cropped. */
   fit?: "contain";
+  /** Background shown around a contained image; use "black" for artwork that sits on black. */
+  matte?: "black";
 };
 
 /** Finished projects, by term. Slots without an entry render as "Coming soon" placeholders. */
@@ -100,6 +102,18 @@ export const projectsByTerm: Partial<Record<(typeof terms)[number]["key"], Proje
       alt: "Multimedia matrix for the Cat Thought Translation App: target audience, core message, and how text, graphics, audio, video and animation are used and why they are effective",
       href: "/Prelim/cat-thought-translation.webp",
       tall: true,
+    },
+    {
+      slug: "scansync-show-progress",
+      title: "ScanSync Show Progress",
+      kind: "Logo · Image",
+      image: "/Prelim/scansync-show-progress.webp",
+      width: 855,
+      height: 637,
+      alt: "ScanSync Show Progress: a blue shield logo with swooping stripes on a black background",
+      href: "/Prelim/scansync-show-progress.webp",
+      fit: "contain",
+      matte: "black",
     },
   ],
   midterm: [
