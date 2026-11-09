@@ -25,7 +25,7 @@ export const education = [
 export const terms = [
   { key: "prelim", label: "Prelim", count: 3 },
   { key: "midterm", label: "Midterm", count: 3 },
-  { key: "finals", label: "Finals", count: 3 },
+  { key: "finals", label: "Finals", count: 2 },
 ] as const;
 
 export type Project = {
@@ -89,6 +89,17 @@ export const projectsByTerm: Partial<Record<(typeof terms)[number]["key"], Proje
       href: "/Prelim/montage.mp4",
       video: "/Prelim/montage.mp4",
       preview: "/Prelim/montage-preview.mp4",
+    },
+    {
+      slug: "cat-thought-translation",
+      title: "Cat Thought Translation App — Stop guessing. Start listening.",
+      kind: "Multimedia matrix · Image",
+      image: "/Prelim/cat-thought-translation.webp",
+      width: 529,
+      height: 745,
+      alt: "Multimedia matrix for the Cat Thought Translation App: target audience, core message, and how text, graphics, audio, video and animation are used and why they are effective",
+      href: "/Prelim/cat-thought-translation.webp",
+      tall: true,
     },
   ],
   midterm: [
