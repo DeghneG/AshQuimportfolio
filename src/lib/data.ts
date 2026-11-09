@@ -46,6 +46,8 @@ export type Project = {
   preview?: string;
   /** Optional outside link shown on the project page (e.g. a Canva presentation). */
   external?: { label: string; url: string };
+  /** Wide or text-heavy artwork is shown whole (letterboxed) on the card instead of cropped. */
+  fit?: "contain";
 };
 
 /** Finished projects, by term. Slots without an entry render as "Coming soon" placeholders. */
@@ -64,6 +66,17 @@ export const projectsByTerm: Partial<Record<(typeof terms)[number]["key"], Proje
         label: "Open the presentation on Canva",
         url: "https://www.canva.com/design/DAHQLYOxb04/4LI43Pmzs3JtOqXOvxrM0A/edit",
       },
+    },
+    {
+      slug: "bandlab",
+      title: "BandLab",
+      kind: "Lab activity · Image",
+      image: "/Prelim/bandlab.webp",
+      width: 1057,
+      height: 392,
+      alt: "Lab table comparing an original track with simulated 22.05 kHz, 8 kHz and 8-bit versions in BandLab: the setting used, target frequency, how it sounds and what disappeared",
+      href: "/Prelim/bandlab.webp",
+      fit: "contain",
     },
   ],
   midterm: [
