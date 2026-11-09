@@ -44,10 +44,28 @@ export type Project = {
   video?: string;
   /** Tiny silent clip played on card hover so hovering never downloads the full video. */
   preview?: string;
+  /** Optional outside link shown on the project page (e.g. a Canva presentation). */
+  external?: { label: string; url: string };
 };
 
 /** Finished projects, by term. Slots without an entry render as "Coming soon" placeholders. */
 export const projectsByTerm: Partial<Record<(typeof terms)[number]["key"], Project[]>> = {
+  prelim: [
+    {
+      slug: "scansync-presentation",
+      title: "ScanSync Presentation",
+      kind: "Presentation · Canva",
+      image: "/Prelim/scansync-presentation.webp",
+      width: 1131,
+      height: 636,
+      alt: "Title slide: ScanSync, a QR code-based attendance monitoring system with parent notification for the University of San Agustin, with the four team members listed",
+      href: "https://www.canva.com/design/DAHQLYOxb04/4LI43Pmzs3JtOqXOvxrM0A/edit",
+      external: {
+        label: "Open the presentation on Canva",
+        url: "https://www.canva.com/design/DAHQLYOxb04/4LI43Pmzs3JtOqXOvxrM0A/edit",
+      },
+    },
+  ],
   midterm: [
     {
       slug: "scansync",

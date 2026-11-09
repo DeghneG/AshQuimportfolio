@@ -37,7 +37,9 @@ async function ProjectContent({ params }: { params: Promise<Params> }) {
   const at = siblings.findIndex((p) => p.slug === project.slug);
   const prev = at > 0 ? siblings[at - 1] : undefined;
   const next = at < siblings.length - 1 ? siblings[at + 1] : undefined;
-  const isPdf = project.href.endsWith(".pdf");
+  const outsideLink =
+    project.external ??
+    (project.href.endsWith(".pdf") ? { label: "Open the original PDF", url: project.href } : undefined);
   // Back returns to the exact term row the visitor came from.
   const backHref = `/#${project.termKey}`;
 
@@ -96,10 +98,10 @@ async function ProjectContent({ params }: { params: Promise<Params> }) {
             )}
           </div>
 
-          {isPdf && (
+          {outsideLink && (
             <p data-reveal className="mt-5 text-center text-sm">
-              <a href={project.href} target="_blank" rel="noreferrer" className="rule-link font-medium text-navy">
-                Open the original PDF ↗
+              <a href={outsideLink.url} target="_blank" rel="noreferrer" className="rule-link font-medium text-navy">
+                {outsideLink.label} ↗
               </a>
             </p>
           )}
