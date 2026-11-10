@@ -21,7 +21,6 @@ export default function Contact() {
         </a>
         <div data-reveal className="mt-8 flex gap-3">
           <a href={profile.github} target="_blank" rel="noreferrer" className="rounded-full border border-navy px-5 py-2 text-sm text-navy transition-colors hover:bg-navy hover:text-paper">GitHub profile</a>
-          <a href={profile.linkedin} target="_blank" rel="noreferrer" className="rounded-full border border-navy px-5 py-2 text-sm text-navy transition-colors hover:bg-navy hover:text-paper">LinkedIn profile</a>
         </div>
       </Reveal>
     </section>

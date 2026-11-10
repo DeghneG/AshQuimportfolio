@@ -59,8 +59,6 @@ export function Footer() {
             </p>
             <p className="flex flex-col gap-1">
               <a href={profile.github} target="_blank" rel="noreferrer" className="rule-link w-fit">GitHub</a>
-              <a href={profile.linkedin} target="_blank" rel="noreferrer" className="rule-link w-fit">LinkedIn</a>
-              <a href={profile.facebook} target="_blank" rel="noreferrer" className="rule-link w-fit">Facebook</a>
             </p>
           </div>
         </div>

@@ -2,8 +2,6 @@ export const profile = {
   name: "Ashjan Quimpo",
   email: "ashjanquimpo@gmail.com",
   github: "https://github.com/AshPro02",
-  linkedin: "https://www.linkedin.com/in/ashjan-quimpo-b83893449",
-  facebook: "https://www.facebook.com/ashjan.quimpo",
 };
 
 export const skillGroups = [
