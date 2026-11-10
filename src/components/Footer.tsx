@@ -37,7 +37,7 @@ export function Footer() {
               {profile.email}
             </a>
             <div className="mt-5">
-              <Link href="/contact" className="rule-link inline-flex items-center gap-2">
+              <Link href="/contact#message" className="rule-link inline-flex items-center gap-2">
                 Start a project <span aria-hidden>↗</span>
               </Link>
             </div>
