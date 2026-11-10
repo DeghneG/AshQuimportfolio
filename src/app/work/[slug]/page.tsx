@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { BackButton } from "@/components/BackButton";
 import { notFound } from "next/navigation";
 import { Reveal } from "@/components/Reveal";
 import { listProjects } from "@/lib/data";
@@ -40,7 +41,7 @@ async function ProjectContent({ params }: { params: Promise<Params> }) {
   const outsideLink =
     project.external ??
     (project.href.endsWith(".pdf") ? { label: "Open the original PDF", url: project.href } : undefined);
-  // Back returns to the exact term row the visitor came from.
+  // Back goes to the page the visitor came from; with no history it falls back to this term row.
   const backHref = `/#${project.termKey}`;
 
   return (
@@ -48,12 +49,7 @@ async function ProjectContent({ params }: { params: Promise<Params> }) {
       <div className="mx-auto max-w-6xl">
         <Reveal>
           <div data-reveal>
-            <Link
-              href={backHref}
-              className="inline-flex items-center gap-2 rounded-full border border-navy px-5 py-2.5 text-sm font-medium text-navy transition-colors hover:bg-navy hover:text-paper"
-            >
-              <span aria-hidden>←</span> Back to work
-            </Link>
+            <BackButton fallback={backHref} />
           </div>
 
           <div data-reveal className="mt-10 flex flex-wrap items-end justify-between gap-4 border-b border-navy/70 pb-5">

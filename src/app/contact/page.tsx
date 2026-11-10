@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BackButton } from "@/components/BackButton";
 import { ContactForm } from "@/components/ContactForm";
 import { Reveal } from "@/components/Reveal";
 import { profile } from "@/lib/data";
@@ -10,6 +11,9 @@ export default function Contact() {
     <section className="px-5 pb-24 pt-32 sm:px-8">
       <Reveal className="mx-auto grid w-full max-w-6xl gap-14 md:grid-cols-[1fr_1.1fr] md:gap-20">
         <div>
+          <div data-reveal className="mb-10">
+            <BackButton fallback="/" />
+          </div>
           <p data-reveal className="label mb-6">Contact</p>
           <h1 data-reveal className="display text-[clamp(2.5rem,6vw,5rem)] font-semibold leading-none">
             Let&apos;s build <span className="text-red">something.</span>

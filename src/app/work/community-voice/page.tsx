@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BackButton } from "@/components/BackButton";
 import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = { title: "CommunityVoice — Ashjan Quimpo" };
@@ -16,8 +17,10 @@ export default function CommunityVoice() {
     <article className="px-5 pb-24 pt-32 sm:px-8">
       <div className="mx-auto max-w-6xl">
         <Reveal className="mb-20">
-          <Link data-reveal href="/#work" className="label rule-link">← Back to work</Link>
-          <h1 data-reveal className="display mt-8 text-[clamp(2.8rem,8vw,6.5rem)] font-semibold leading-none">
+          <div data-reveal>
+            <BackButton fallback="/#work" />
+          </div>
+          <h1 data-reveal className="display mt-10 text-[clamp(2.8rem,8vw,6.5rem)] font-semibold leading-none">
             Community<span className="text-red">Voice</span>
           </h1>
           <p data-reveal className="mt-6 max-w-xl text-lg text-ink-soft">Case study overview goes here.</p>

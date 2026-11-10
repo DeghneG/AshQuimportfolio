@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { Preloader } from "@/components/Preloader";
+import { NavTracker } from "@/components/NavTracker";
 import { PRELOADER_BOOT_SCRIPT } from "@/lib/preloader";
 
 const chakra = Chakra_Petch({ variable: "--font-chakra", subsets: ["latin"], weight: ["500", "600", "700"] });
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body id="top" className="flex min-h-full flex-col">
         <Preloader />
+        <NavTracker />
         <SmoothScroll />
         <ScrollProgress />
         <Header />
